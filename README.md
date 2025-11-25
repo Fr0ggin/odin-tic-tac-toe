@@ -11,7 +11,7 @@ players take turns to place X or O on empty square
 Current board/score is shown between turns
 Check on victory condition 
 if true
-    gamescore update
+    game-score update
     victory message
     new game?
     if true
@@ -30,10 +30,10 @@ Class Player # contains all the player information needed
 @losses, # to keep track of lost games
 @draws, # to keep track of draws
 
-Class Board # contains the gamestate
+Class Board # contains the game-state
 
 def is_taken? # to check if player input is valid
-def is_victory? # to check if victory condition is fullfilled
+def is_victory? # to check if victory condition is fulfilled
 def place_marker # takes player input and updates board 
 def show # to show the board 
 
