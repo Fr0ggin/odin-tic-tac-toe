@@ -29,13 +29,13 @@ Class Player # contains all the player information needed
 @wins, # to keep track of won games
 @losses, # to keep track of lost games
 @draws, # to keep track of draws
-@has_turn # to keep track who has turn
 
 Class Board # contains the gamestate
 
 def is_taken? # to check if player input is valid
 def is_victory? # to check if victory condition is fullfilled
 def place_marker # takes player input and updates board 
+def show # to show the board 
 
 
 
