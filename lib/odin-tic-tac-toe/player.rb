@@ -19,7 +19,7 @@ class Player
   end
 
   def add_loss
-    @lossed += 1
+    @losses += 1
   end
 
   def add_draw
