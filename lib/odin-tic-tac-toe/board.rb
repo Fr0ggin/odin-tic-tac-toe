@@ -53,6 +53,10 @@ class Board
     end
   end
 
+  def draw?
+    all_lines.exclude?(nil)
+  end
+
   # to check if victory condition is fulfilled
   def check_victory
     all_lines.each do |line|
