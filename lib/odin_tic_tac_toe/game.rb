@@ -22,7 +22,6 @@ class Game
     create_players
     @board = Board.new
     @current_player = @player1
-    board.show
   end
 
   def create_players
@@ -30,6 +29,7 @@ class Game
     name = gets.chomp
     @player1 = Player.new(1, name.empty? ? 'Player 1' : name, 'X')
     puts "Thank you #{@player1.name} and now.. who will play with 'O'?"
+    name = gets.chomp
     @player2 = Player.new(2, name.empty? ? 'Player 2' : name, 'O')
   end
 
@@ -49,6 +49,7 @@ class Game
 
   def take_turn(player)
     loop do
+      puts "#{@current_player.name}, your up!"
       move = request_player_move
       if empty?(move[0], move[1])
         place_marker(move[0], move[1], player.marker)
@@ -66,16 +67,20 @@ class Game
     @current_player == @player1 ? @player2 : @player1
   end
 
+  def victory
+    puts "Congratulations #{@current_player.name} you won!"
+    @current_player.add_win
+    other_player.add_loss
+  end
+
   def play
+    @board.show
     loop do
-      puts "#{@current_player.name}, your up!"
       take_turn(@current_player)
-      board.show
-      victory = check_victory
-      if victory.include('X', 'O')
-        puts "Congratulations #{@current_player.name} you won!"
-        @current_player.add_win
-        other_player.add_loss
+      @board.show
+      winner = check_victory
+      if winner.include('X', 'O')
+        victory
         break
       elsif is_draw?
         puts "It's a draw, hope you both had fun!"
@@ -83,5 +88,11 @@ class Game
         @current_player = @other_player
       end
     end
+  end
+
+  def start
+    @board = Board.new
+    @current_player = @player1
+    play
   end
 end
