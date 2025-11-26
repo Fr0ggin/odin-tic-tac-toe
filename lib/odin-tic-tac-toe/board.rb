@@ -6,24 +6,63 @@ class Board
 
   # initialize with nil values so returns falsy on unused
   def initialize
-    @board = Array.new(3, Array.new(3))
+    @board = Array.new(3) { Array.new(3) }
+  end
+
+  def rows
+    board
+  end
+
+  def columns
+    board.transpose
+  end
+
+  def diagonals
+    [
+      [board[0][0], board[1][1], board[2][2]],
+      [board[0][2], board[1][1], board[2][0]]
+    ]
+  end
+
+  def all_lines
+    rows + columns + diagonals
   end
 
   def empty?(row, column)
     !@board.fetch(row).fetch(column)
   end
 
-  def add_marker(row, column, marker)
+  def place_marker(row, column, marker)
     @board[row][column] = marker
   end
 
+  def check_line(line)
+    case line.all?
+    when false
+      false
+    when true
+      if line[0] == 'X'
+        'X'
+      elsif line[0] == 'O'
+        'O'
+      end
+    end
+  end
+
   def check_victory
-    # define all win conditions in tic-tac-toe
-    # 3 in a row
-    # 3 in a column
-    # 3 diagonally
-    # possible ways to check in array is iterate and check for equal
-    # otherwise possible trough multiple if statements
-    # you could also count "X" and "O" in each row/column/diag
+    all_lines.each do |line|
+      if check_line(line) == 'X'
+        return 'X'
+      elsif check_line(line) == 'O'
+        return 'O'
+      end
+    end
+  end
+
+  def show
+    3.times do |r|
+      p board[r].join(' | ')
+      puts '---------' unless r == 2
+    end
   end
 end
