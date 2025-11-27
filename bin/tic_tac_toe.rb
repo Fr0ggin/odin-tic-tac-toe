@@ -2,4 +2,5 @@
 
 require_relative '../lib/odin_tic_tac_toe'
 
-Game.new.play
+game = Game.new
+game.start

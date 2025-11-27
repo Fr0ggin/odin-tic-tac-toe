@@ -54,7 +54,7 @@ class Board
   end
 
   def draw?
-    all_lines.exclude?(nil)
+    all_lines.flatten.none?(nil)
   end
 
   # to check if victory condition is fulfilled

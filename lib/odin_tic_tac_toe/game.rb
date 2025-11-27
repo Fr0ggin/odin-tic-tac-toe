@@ -16,7 +16,7 @@
 # if false
 #     repeat from step 1
 #
-# Contains the core gameplay loop,
+# Contains the core gameplay loop. def play is a round. def start initiates a new game
 class Game
   def initialize
     create_players
@@ -35,24 +35,26 @@ class Game
 
   # requests a row and column and returns an array with row and column
   def request_player_move
+    row = column = nil
     loop do
       puts 'in which row (0,1,2) do you want to place your mark?'
       row = gets.chomp
       puts 'and in what column (0,1,2) do you want to place your mark?)'
       column = gets.chomp
-      break if (0..2).include?(row) && (0..2).include?(column)
+      valid = %w[0 1 2]
+      break if valid.include?(row) && valid.include?(column)
 
       puts 'This is an invalid input, try again'
     end
-    [row, column]
+    [row.to_i, column.to_i]
   end
 
   def take_turn(player)
     loop do
       puts "#{@current_player.name}, your up!"
       move = request_player_move
-      if empty?(move[0], move[1])
-        place_marker(move[0], move[1], player.marker)
+      if @board.empty?(move[0], move[1])
+        @board.place_marker(move[0], move[1], player.marker)
         break
       end
       puts 'This place is already taken, try again'
@@ -78,12 +80,13 @@ class Game
     loop do
       take_turn(@current_player)
       @board.show
-      winner = check_victory
-      if winner.include('X', 'O')
+      winner = @board.check_victory
+      if winner.include?('XO')
         victory
         break
-      elsif is_draw?
+      elsif @board.draw?
         puts "It's a draw, hope you both had fun!"
+        break
       else
         @current_player = @other_player
       end
