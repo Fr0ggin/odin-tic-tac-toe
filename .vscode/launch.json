@@ -2,20 +2,21 @@
     // Use IntelliSense to learn about possible attributes.
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "rdbg",
-            "name": "Debug current file with rdbg",
-            "request": "launch",
-            "script": "${file}",
-            "args": [],
-            "askParameters": true
-        },
-        {
-            "type": "rdbg",
-            "name": "Attach with rdbg",
-            "request": "attach"
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "rdbg",
+      "name": "Run Tic Tac Toe",
+      "request": "launch",
+      "script": "${workspaceFolder}/bin/tic_tac_toe.rb",
+      "args": [],
+      "askParameters": false,
+      "useTerminal": true      // <-- this is the important line
+    },
+    {
+      "type": "rdbg",
+      "name": "Attach with rdbg",
+      "request": "attach"
+    }
+  ]
 }

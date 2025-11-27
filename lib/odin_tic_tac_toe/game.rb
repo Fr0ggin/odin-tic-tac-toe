@@ -81,14 +81,14 @@ class Game
       take_turn(@current_player)
       @board.show
       winner = @board.check_victory
-      if winner.include?('XO')
+      if %w[X O].include?(winner)
         victory
         break
       elsif @board.draw?
         puts "It's a draw, hope you both had fun!"
         break
       else
-        @current_player = @other_player
+        switch_turn
       end
     end
   end
