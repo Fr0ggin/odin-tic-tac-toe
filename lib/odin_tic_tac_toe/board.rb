@@ -41,15 +41,15 @@ class Board
   end
 
   def check_line(line)
-    case line.all?
-    when false
-      false
-    when true
-      if line[0] == 'X'
-        'X'
-      elsif line[0] == 'O'
-        'O'
-      end
+    return unless line.uniq.length == 1
+
+    case line.first
+    when nil
+      nil
+    when 'X'
+      'X'
+    when 'O'
+      'O'
     end
   end
 
